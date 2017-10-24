@@ -67,6 +67,24 @@ The detected features for \(peakThreshold \in \{0.0001, 0.001, 0.01\}\) are show
 \end{enumerate}
 
 
+\question{QIB.1: Note the descriptors are computed over a much larger region (shown in blue) than the detection (shown in green). Why is this a good strategy?}
+\singlefig{IB_2}{1}{Computation of SIFT descriptors over 4x4 grid arround the keypoint}{fig:4x4grid}
+
+The larger regions are shown in Figure~\ref{fig:4x4grid}. It is a good strategy to be insensitive to small geometric deformations, and small variations of illumination, by taking the average over a larger region
+
+
+\question{QIB.2: Examine carefully the mismatches and try to understand the different causes of mismatch. (i) In your report, present at least 3 of them and explain why the mistakes are being made. For example, is the change in lighting a problem? (ii) What additional constraints can be applied to remove the mismatches?}
+
+\singlefig{IB_3}{1}{Three missmatches with SIFT features descriptors}{fig:3miss}
+\begin{enumerate}
+	\item Three types of mismatch are presentend in Figure~\ref{fig:3miss} \begin{itemize}
+		      \item repetitive pattern (in blue)
+		      \item constant local change in lighting leading to similarity between two different keypoints (in red)
+		      \item ambiguities between two nearest neighbors (in yellow)
+	      \end{itemize}
+	      A global change in lighting is irrelevant for matching, because of the gradient nullifying the constant component
+	\item Geometric verification with global constraints can discard those mismatches.
+\end{enumerate}
 
 
 \end{document}

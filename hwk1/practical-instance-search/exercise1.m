@@ -93,7 +93,7 @@ vl_plotsiftdescriptor(descrs1(:,1:50:end), ...
 hold on ;
 vl_plotframe(frames1(:,1:50:end)) ;
 
-% Find for each desriptor in im1 the closest descriptor in im2
+%% Find for each desriptor in im1 the closest descriptor in im2
 nn = findNeighbours(descrs1, descrs2) ;
 
 % Construct a matrix of matches. Each column stores two index of
@@ -103,7 +103,8 @@ matches = [1:size(descrs1,2) ; nn(1,:)] ;
 % Display the matches
 figure(4) ; clf ;
 set(gcf,'name', 'Part I.B: SIFT descriptors - matching') ;
-plotMatches(im1,im2,frames1,frames2,matches) ;
+% plotMatches(im1,im2,frames1,frames2,matches(:,3:200:end)) ;
+plotMatches(im1,im2,frames1,frames2,matches(:,[203 1603 1803])) ;
 title('Nearest neighbour matches') ;
 
 %%

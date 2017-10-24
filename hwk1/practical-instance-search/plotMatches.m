@@ -43,5 +43,5 @@ else
   vl_plotframe(f1(:,i1),'linewidth',2) ;
   vl_plotframe(f2p(:,i2),'linewidth',2) ;
 end
-line([f1(1,i1);f2p(1,i2)], [f1(2,i1);f2p(2,i2)]) ;
+line([f1(1,i1);f2p(1,i2)], [f1(2,i1);f2p(2,i2)], 'linewidth', 2) ;
 title(sprintf('number of matches: %d', size(matches,2))) ;
