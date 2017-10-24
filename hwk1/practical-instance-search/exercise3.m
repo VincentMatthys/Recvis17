@@ -1,24 +1,25 @@
-% PART III: Towards large-scale retrieval
+%% PART III: Towards large-scale retrieval
 
 % setup MATLAB to use our software
 setup ;
+
 
 % --------------------------------------------------------------------
 %      Stage III.A: Accelerating descriptor matching with visual words
 % --------------------------------------------------------------------
 
-% Load a visual word vocabulary
+%% Load a visual word vocabulary
 load('data/oxbuild_lite_imdb_100k_ellipse_hessian.mat', 'vocab', 'kdtree') ;
 
-% Load the two images
+%% Load the two images
 im1 = imread('data/oxbuild_lite/ashmolean_000007.jpg') ;
 im2 = imread('data/oxbuild_lite/ashmolean_000028.jpg') ;
 
-% Compute SIFT features for each
+%% Compute SIFT features for each
 [frames1, descrs1] = getFeatures(im1, 'peakThreshold', 0.001, 'orientation', false) ;
 [frames2, descrs2] = getFeatures(im2, 'peakThreshold', 0.001, 'orientation', false) ;
 
-% Get the matches based on the raw descriptors
+%% Get the matches based on the raw descriptors
 tic ;
 [nn, dist2] = findNeighbours(descrs1, descrs2, 2) ;
 nnThreshold = 0.8 ;
@@ -27,19 +28,20 @@ ok = ratio2 <= nnThreshold^2 ;
 matches_raw = [find(ok) ; nn(1,ok)] ;
 time_raw = toc ;
 
-% Quantise the descritpors
+%% Quantise the descriptors
 words1 = vl_kdtreequery(kdtree, vocab, descrs1, 'maxNumComparisons', 1024) ;
 words2 = vl_kdtreequery(kdtree, vocab, descrs2, 'maxNumComparisons', 1024) ;
 
-% Get the matches based on the quantized descriptors
+%% Get the matches based on the quantized descriptors
 tic ;
 matches_word = matchWords(words1,words2) ;
 time_word = toc;
 
-% Count inliers
+%% Count inliers
 inliers_raw = geometricVerification(frames1,frames2,matches_raw,'numRefinementIterations', 3) ;
 inliers_word = geometricVerification(frames1,frames2,matches_word,'numRefinementIterations', 3) ;
 
+%% Visualisation
 figure(1) ; clf ;
 set(gcf,'name', 'III.B: Accelerating descriptor matching with visual words') ;
 
@@ -53,7 +55,7 @@ title(sprintf('Verified matches on visual words (%d in %.3g s)',numel(inliers_wo
 %                        Stage III.B: Searching with an inverted index
 % --------------------------------------------------------------------
 
-% Load an image DB
+%% Load an image DB
 imdb = loadIndex('data/oxbuild_lite_imdb_100k_ellipse_hessian.mat') ;
 
 % Compute a histogram for the query image

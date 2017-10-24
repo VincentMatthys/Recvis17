@@ -103,8 +103,8 @@ matches = [1:size(descrs1,2) ; nn(1,:)] ;
 % Display the matches
 figure(4) ; clf ;
 set(gcf,'name', 'Part I.B: SIFT descriptors - matching') ;
-% plotMatches(im1,im2,frames1,frames2,matches(:,3:200:end)) ;
-plotMatches(im1,im2,frames1,frames2,matches(:,[203 1603 1803])) ;
+plotMatches(im1,im2,frames1,frames2,matches) ;
+% plotMatches(im1,im2,frames1,frames2,matches(:,[203 1603 1803])) ;
 title('Nearest neighbour matches') ;
 
 %%
@@ -115,8 +115,8 @@ title('Nearest neighbour matches') ;
 % Find the top two neighbours as well as their distances
 [nn, dist2] = findNeighbours(descrs1, descrs2, 2) ;
 
-% Accept neighbours if their second best match is sufficiently far off
-nnThreshold = 0.8 ;
+%% Accept neighbours if their second best match is sufficiently far off
+nnThreshold = 0.95 ;
 ratio2 = dist2(1,:) ./ dist2(2,:) ;
 ok = ratio2 <= nnThreshold^2 ;
 
@@ -133,8 +133,10 @@ matches_2nn = [find(ok) ; nn(1, ok)] ;
 figure(5) ; clf ;
 set(gcf,'name', 'Part I.C: SIFT descriptors - Lowe''s test') ;
 plotMatches(im1,im2,frames1,frames2,matches_2nn) ;
-title('Matches filtered by the second nearest neighbour test') ;
+title('');
+% title('Matches filtered by the second nearest neighbour test') ;
 
+size(matches_2nn)
 %%
 % --------------------------------------------------------------------
 %             Stage I.D: Better matching (ii) geometric transformation
@@ -143,8 +145,10 @@ title('Matches filtered by the second nearest neighbour test') ;
 inliers = geometricVerification(frames1, frames2, matches_2nn, 'numRefinementIterations', 8) ;
 matches_geo = matches_2nn(:, inliers) ;
 
-% Display the matches
+size(matches_geo)
+%% Display the matches
 figure(6) ; clf ;
 set(gcf,'name', 'Part I.D: SIFT descriptors - geometric verification') ;
 plotMatches(im1,im2,frames1,frames2,matches_geo) ;
-title('Matches filtered by geometric verification') ;
+% title('Matches filtered by geometric verification') ;
+title('');

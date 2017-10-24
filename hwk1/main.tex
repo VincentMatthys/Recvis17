@@ -68,23 +68,55 @@ The detected features for \(peakThreshold \in \{0.0001, 0.001, 0.01\}\) are show
 
 
 \question{QIB.1: Note the descriptors are computed over a much larger region (shown in blue) than the detection (shown in green). Why is this a good strategy?}
-\singlefig{IB_2}{1}{Computation of SIFT descriptors over 4x4 grid arround the keypoint}{fig:4x4grid}
+
+\doublefig{\subfig{IB_2}{1}{4x4 grid arround the keypoint}{fig:4x4grid}}
+{\subfig{IB_3_1}{1}{first NN match}{fig:firstNN}}
+{Computation of SIFT descriptors and matching}{fig:IB1}
+
 
 The larger regions are shown in Figure~\ref{fig:4x4grid}. It is a good strategy to be insensitive to small geometric deformations, and small variations of illumination, by taking the average over a larger region
 
 
 \question{QIB.2: Examine carefully the mismatches and try to understand the different causes of mismatch. (i) In your report, present at least 3 of them and explain why the mistakes are being made. For example, is the change in lighting a problem? (ii) What additional constraints can be applied to remove the mismatches?}
 
-\singlefig{IB_3}{1}{Three missmatches with SIFT features descriptors}{fig:3miss}
+\singlefig{IB_3}{1}{Three mismatches with SIFT features descriptors, subgroup of matches extracted from~\ref{fig:firstNN}}{fig:3miss}
 \begin{enumerate}
-	\item Three types of mismatch are presentend in Figure~\ref{fig:3miss} \begin{itemize}
+	\item Three types of mismatch are presentend in Figure~\ref{fig:3miss}, and are extracted from Figure~\ref{fig:firstNN} \begin{itemize}
 		      \item repetitive pattern (in blue)
 		      \item constant local change in lighting leading to similarity between two different keypoints (in red)
-		      \item ambiguities between two nearest neighbors (in yellow)
+		      \item ambiguity between a keypoint his first two nearest neighbors (in yellow)
 	      \end{itemize}
 	      A global change in lighting is irrelevant for matching, because of the gradient nullifying the constant component
-	\item Geometric verification with global constraints can discard those mismatches.
+	\item Geometric verification with global constraints can discard those mismatches. Another method, presented below, is to look at the second nearest neigbour to remove ambiguous matches.
 \end{enumerate}
 
+\question{QIC.1: Illustrate and comment on improvements that you can achieve with this step. Include in your report figures showing the varying number of tentative matches when you change the nnThreshold parameter.}
+
+As expected, the percentage of matches kept increases with \( nnThreshold\). The results obtained are shown in Figures~\ref{fig:IC_12}~\ref{fig:IC_34}~\ref{fig:IC_5}. Until \( nnThreshold = 0.7\), there is no substantial mismatches, but the number of matches kept is below \( 10~\%\). If more matches are kept, a non-negligeable part of new matches is missmatches, because the ambiguity between the first and the second nearest neighbour is no longer removed. In Figure~\ref{fig:graphnnth} we can see the exponential growth of the number of matches with \( nnThreshold \). A good compromise would be to take the threshold before this exponential growth.
+
+\doublefig{\subfig{IC_1}{1}{\( nnThreshold = 0.3\)}{fig:nth0.3}}
+{\subfig{IC_2}{1}{\( nnThreshold = 0.5\)}{fig:nth0.5}}
+{Matching using Lowe's second nearest neighbour - part1}{fig:IC_12}
+\doublefig{\subfig{IC_3}{1}{\( nnThreshold = 0.7\)}{fig:nth0.7}}
+{\subfig{IC_4}{1}{\( nnThreshold = 0.9\)}{fig:nth0.9}}
+{Matching using Lowe's second nearest neighbour - part2}{fig:IC_34}
+\doublefig{\subfig{IC_5}{1}{\( nnThreshold = 0.8\)}{fig:nth0.8}}
+{\subfig{2nn_graph}{1}{Percentage of matches in function of the \( nnThreshold\)}{fig:graphnnth}}
+{Matching using Lowe's second nearest neighbour - part3}{fig:IC_5}
+
+
+\question{QID.1: Work out how to compute this transformation from a single correspondence. Hint: recall from Stage I.A that a SIFT feature frame is an oriented circle and map one onto the other.}
+
+
+\question{QID.2: Illustrate improvements that you can achieve with this step.}
+\doublefig{\subfig{ID_2}{1}{\( nnThreshold = 0.8\)}{fig:nth0.8_geo}}
+{\subfig{geo_verif}{1}{Percentage of matches in function of the \( nnThreshold\)}{fig:graph_geo}}
+{Improving SIFT matching with Lowe's 2nd nn and geometric verification}{fig:ID_2}
+In Figure~\ref{fig:nth0.8_geo}, it's clear there is no mismatch anymore: every match corresponds to a unique geometric tranformation. The number of matches dropped from \( 293\) to \( 123\). It means only \( 42\%\) of the matches given by the Lowe's method were inliers. In Figure~\ref{fig:graph_geo} we can observe the almost linear growth of matches with \( nnThreshold\) with the geometric verification, in comparaison with the exponential growth of the Lowe's method alone.
+
+\question{QII.1: Include in your report images and a graph showing the number of verified matches with changing viewpoint. At first there are more similarity detector matches than affine. Why?}
+At first, introducing affine detectors is introducing a second spatial dimension for each blob, which leads to one more constraint to verify in the geometric transformation. This results discarding some outliers at the very beginning.
+
+\question{QIIIA.1: In the above procedure the time required to convert the descriptors into visual words was not accounted for. Why the speed of this step is less important in practice?}
 
 \end{document}
