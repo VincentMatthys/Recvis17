@@ -14,6 +14,8 @@ load('data/oxbuild_lite_imdb_100k_ellipse_hessian.mat', 'vocab', 'kdtree') ;
 %% Load the two images
 im1 = imread('data/oxbuild_lite/ashmolean_000007.jpg') ;
 im2 = imread('data/oxbuild_lite/ashmolean_000028.jpg') ;
+% im1 = imread('data/oxbuild_lite/all_souls_000002.jpg') ;
+% im2 = imread('data/oxbuild_lite/all_souls_000015.jpg') ;
 
 %% Compute SIFT features for each
 [frames1, descrs1] = getFeatures(im1, 'peakThreshold', 0.001, 'orientation', false) ;
@@ -51,6 +53,7 @@ title(sprintf('Verified matches on raw descritpors (%d in %.3g s)',numel(inliers
 subplot(2,1,2) ; plotMatches(im1,im2,frames1,frames2,matches_word(:,inliers_word)) ;
 title(sprintf('Verified matches on visual words (%d in %.3g s)',numel(inliers_word),time_word)) ;
 
+%%
 % --------------------------------------------------------------------
 %                        Stage III.B: Searching with an inverted index
 % --------------------------------------------------------------------
@@ -66,17 +69,18 @@ tic ;
 scores = h' * imdb.index ;
 time_index = toc ;
 
-% Plot results by decreasing score
+%% Plot results by decreasing score
 figure(2) ; clf ;
 plotRetrievedImages(imdb, scores, 'num', 25) ;
 set(gcf,'name', 'III.B: Searching with an inverted index') ;
 fprintf('Search time per database image: %.3g s\n', time_index / size(imdb.index,2)) ;
 
+
 % --------------------------------------------------------------------
 %                                    Stage III.C: Geometric rearanking
 % --------------------------------------------------------------------
 
-% Rescore the top 16 images based on the number of
+%% Rescore the top 16 images based on the number of
 % inlier matches.
 
 [~, perm] = sort(scores, 'descend') ;
@@ -97,7 +101,7 @@ set(gcf,'name', 'III.B: Searching with an inverted index - verification') ;
 %                                             Stage III.D: Full system
 % --------------------------------------------------------------------
 
-% Load the database if not already in memory or if it is the one
+%% Load the database if not already in memory or if it is the one
 % from exercise4
 if ~exist('imdb', 'var') || isfield(imdb.images, 'wikiNames')
   imdb = loadIndex('data/oxbuild_lite_imdb_100k_ellipse_hessian.mat', ...
@@ -109,7 +113,9 @@ end
 % Internet.
 
 url1 = 'data/queries/mistery-building1.jpg' ;
+tic ;
 res = search(imdb, url1, 'box', []) ;
+time_index = toc;
 
 % Display the results
 figure(4) ; clf ; set(gcf,'name', 'Part III.D: query image') ;

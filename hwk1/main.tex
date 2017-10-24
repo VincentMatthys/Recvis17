@@ -41,8 +41,8 @@
 
 \begin{enumerate}
 	\item It is important to have a similarity co-variant feature detector in order to extract the same regions of interest regardless of translations, rotations or scales, \textit{i.e.} regardless of viewpoints.
-	\item The fact that the feature detector is co-variant causes the descriptors computed at these detections to undergo the same tranformations than the image.
-	\item Having feature detectors with similarity co-variance and feature descriptors with this and that other property affects the matching process in this way.
+	\item The fact that the feature detector is co-variant causes the descriptors computed at these detections to be invariant after renormalisation step.
+	\item Having feature detectors with similarity co-variance and feature descriptors allows the matching process to be independant of the viewpoints of the images.
 \end{enumerate}
 
 \question{QIA.2: Show the detected features in the two images for three different values of the peakThreshold option}
@@ -106,6 +106,7 @@ As expected, the percentage of matches kept increases with \( nnThreshold\). The
 
 
 \question{QID.1: Work out how to compute this transformation from a single correspondence. Hint: recall from Stage I.A that a SIFT feature frame is an oriented circle and map one onto the other.}
+We need four equations to compute the transformation. With a signle correspondance, we can have 2 equations given by the coordinates of the keypoint in image 1 and the second one in image 2. We have the direction of the gradient, given by the segment, in the both images, giving a third equation. Finaly, we have the size of the blobs in both equations, giving the final equation to compute the 4-parameters transformation.
 
 
 \question{QID.2: Illustrate improvements that you can achieve with this step.}
@@ -118,5 +119,81 @@ In Figure~\ref{fig:nth0.8_geo}, it's clear there is no mismatch anymore: every m
 At first, introducing affine detectors is introducing a second spatial dimension for each blob, which leads to one more constraint to verify in the geometric transformation. This results discarding some outliers at the very beginning.
 
 \question{QIIIA.1: In the above procedure the time required to convert the descriptors into visual words was not accounted for. Why the speed of this step is less important in practice?}
+
+\begin{figure}
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{IIIA_1}
+		\caption{3.1x faster, with \( nnThreshold = 0.8\) and geometric verification}
+		\label{fig:III_A1}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{III_A_11}
+		\caption{20x faster, with \( nnThreshold = 0.8\) and geometric verification}
+		\label{fig:III_A11}
+	\end{subfigure}
+
+	\caption{Accelerating descriptor matching with visual words between second neighbour test and geometric verification}
+	\label{fig:III_A}
+\end{figure}
+
+This step is less important in practice because it's an individual step, which can be done seperatly from the query process, and the result of the translation into visual words can be easily stored with the image, as it represents nothing in comparaison with the size of the image.
+
+\question{QIIIA.2: What is the speedup in seconds in searching a large, fixed database of 10, 100, 1000 images? Measure and report the speedup in seconds for 10, 100 and 1000 images.}
+
+In Figure~\ref{fig:III_A}, the speedup in seconds per image in the databse is \( \approx 1.5~10^{-2}~s\), so, if the conjecture holds, for a database of 10, 100 and 1000 images respectively, the speedup would be \(0.15~s\), \(1.5~s\), \(15~s\).
+
+
+\question{QIIIB.1: Why does the top image have a score of 1?}
+The top image have such a score because it comes from the image database. So the histograms of visual words between the query and the same image in the databae are the same, hence the score of 1.
+
+\question{QIIIB.2: Show the first 25 matching results, indicating the correct and incorrect matches. How many erroneously matched images do you count in the top results?}
+The results of the search are presented in Figure~\ref{fig:IIIB}. The search took \( 7.51~10^{-6}~s/image\) and gives 9 correct answers over the 25 top results.
+
+\singlefig{IIIB_2}{1}{Searching ashmolean\_000028 image in 660 images of the Oxford image database lite\_imdb\_100k}{fig:IIIB}
+
+\question{QIIIC.1: Why is the top score much larger than 1 now?}
+The score is now the number of inliers words between the query and the database. It's larger than 1 for the top result which shares every inliers words with himself.
+
+\question{QIIIC.2: Illustrate improvements of retrieval results after geometric verification.}
+\singlefig{IIIC}{1}{Searching ashmolean\_000028 image in 660 images of the Oxford image database lite\_imdb\_100k. Rescoring with number of inliers words}{fig:IIIC}
+The result of the rescoring of the top 25 previous results is shown in Figure~\ref{fig:IIIC}. On the top 25 results, the 9 correct images are now ranked from 1 to 9,, with a score at least \( 4\) times bigger than the \(10\)th result.
+
+
+\question{QIII.D: Full system}
+
+\singlefig{IIID}{1}{Searching ashmolean\_000028 image in 660 images of the Oxford image database lite\_imdb\_100k. Rescoring with number of inliers words}{fig:IIIC}
+
+\begin{figure}
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=1.\linewidth]{IIID_query}
+		\caption{Quert image}
+		\label{fig:III_D1}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=1.\linewidth]{IIID}
+		\caption{Top 25 results, rescoring with number of common visual words}
+		\label{fig:III_D2}
+	\end{subfigure}
+
+	\caption{Searching mistery-building1 image in 660 images of the Oxford image database lite\_imdb\_100k with geometric rescoring}
+	\label{fig:IIID}
+\end{figure}
+
+
+The query has yet not been shown to the database. The result of the search in the 660 images of the Oxford building database are shown in Figure~\ref{fig:IIID}. Over the top 25 results, only correct answers appear. The search took \(2.2~10^{-3}~s/image\) globally, but the index time was only \(6.1~10^{-3}~s/image\) as already computed in partIII.B.
+
+
+\question{QIV.1: How many features are there in the painting database?}
+
+\question{QIV.2: How much memory does the image database take?}
+
+\question{QIV.3: What are the stages of the search? And how long does each of the stages take for one of the query images?}
+
 
 \end{document}
