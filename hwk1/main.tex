@@ -1,0 +1,72 @@
+\documentclass{article}
+\input{packages}
+\input{macros}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\assignmenttitle}{Assignment 1: Title of the assignment}
+\renewcommand{\studentname}{Vincent Matthys}
+\renewcommand{\email}{vincent.matthys@ens-paris-saclay.fr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Syntax for using figure macros:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \singlefig{filename}{scalefactor}{caption}{label}
+% \doublefig{\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {global caption}{label}
+% \triplefig{\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {global caption}{label}
+%
+% Tips:
+% - with scalefactor=1, a single figure will take the whole page width; a double figure, half page width; and a triple figure, a third of the page width
+% - image files should be placed in the image folder
+% - no need to put image extension to include the image
+% - for vector graphics (plots), pdf figures are suggested
+% - for images, jpg/png are suggested
+% - labels can be left empty {}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beginning of assignment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+
+\question{QIA.1: (i) Why is it important to have a similarity co-variant feature detector? (ii) How does this affect the descriptors computed at these detections? (iii) How does this affect the matching process?}
+
+\begin{enumerate}
+	\item It is important to have a similarity co-variant feature detector in order to extract the same regions of interest regardless of translations, rotations or scales, \textit{i.e.} regardless of viewpoints.
+	\item The fact that the feature detector is co-variant causes the descriptors computed at these detections to undergo the same tranformations than the image.
+	\item Having feature detectors with similarity co-variance and feature descriptors with this and that other property affects the matching process in this way.
+\end{enumerate}
+
+\question{QIA.2: Show the detected features in the two images for three different values of the peakThreshold option}
+
+\triplefig{\subfig{IA_2_1}{1}{\(peakThreshold = 0.0001\)}{fig:002:th_0.0001}} % sublabels used here
+{\subfig{IA_2_2}{1}{\(peakThreshold = 0.001\)}{fig:002:th_0.001}}
+{\subfig{IA_2_3}{1}{\(peakThreshold = 0.01\)}{fig:002:th_0.01}}
+{Feature detectors with three different values of \(peakThreshold\) for all\_souls\_000002.jpg}{fig:002}
+
+\triplefig{\subfig{IA_2_4}{1}{\(peakThreshold = 0.0001\)}{fig:015:th_0.0001}} % sublabels used here
+{\subfig{IA_2_5}{1}{\(peakThreshold = 0.001\)}{fig::015:th_0.001}}
+{\subfig{IA_2_6}{1}{\(peakThreshold = 0.01\)}{fig::015:th_0.01}}
+{Feature detectors with three different values of \(peakThreshold\) for all\_souls\_000015.jpg}{fig:015}
+
+The detected features for \(peakThreshold \in \{0.0001, 0.001, 0.01\}\) are shown in Figure~\ref{fig:002} for the all\_souls\_000002.jpg image, and in Figure~\ref{fig:015} for the all\_souls\_000015.jpg image. As expected, the number of keypoints decreses with the threshold. Moreover the keypoints are fewer in the darker regions, wich leads to asymetric density in the Figure~\ref{fig:015}, especially because of the building shadow.
+
+\question{QIA.3: Note the change in spatial density of detections across images, for a given value of peakThreshold. (i) Is the density uniform? If not, why? (ii) Which implications for image matching can this have? (iii) How can it be avoided?}
+\begin{enumerate}
+	\item In Figures~\ref{fig:002:th_0.0001} and~\ref{fig:015:th_0.0001}. The density is clearly not uniform between the two images. In both, the top-center of the image is very dense, but, in the first one, the grass admits no detection, which leads to a gap in the density, with some detections in the bottom limit of the grass.
+	\item This can lead to error matching the correspondances with local features
+	\item To avoid it we can proceed to a spatial verification relying on global geometric relations.
+\end{enumerate}
+
+
+
+
+\end{document}

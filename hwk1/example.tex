@@ -1,0 +1,67 @@
+\documentclass{article}
+\input{packages}
+\input{macros}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\assignmenttitle}{Assignment 1: Title of the assignment}
+\renewcommand{\studentname}{Vincent Matthys}
+\renewcommand{\email}{email@dot.com}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Syntax for using figure macros:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \singlefig{filename}{scalefactor}{caption}{label}
+% \doublefig{\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {global caption}{label}
+% \triplefig{\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {\subfig{filename}{scalefactor}{subcaption}{sublabel}}
+%           {global caption}{label}
+%
+% Tips:
+% - with scalefactor=1, a single figure will take the whole page width; a double figure, half page width; and a triple figure, a third of the page width
+% - image files should be placed in the image folder
+% - no need to put image extension to include the image
+% - for vector graphics (plots), pdf figures are suggested
+% - for images, jpg/png are suggested
+% - labels can be left empty {}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beginning of assignment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+
+\question{QIA.1: (i) Why is it important to have a similarity co-variant feature detector? (ii) How does this affect the descriptors computed at these detections? (iii) How does this affect the matching process?}
+
+\begin{enumerate}
+	\item It is important to have a similarity co-variant feature detector because of this reason. It is also important because of this other reason.
+	\item The fact that the feature detector is co-variant causes the descriptors computed at these detections to have this and this other property.
+	\item Having feature detectors with similarity co-variance and feature descriptors with this and that other property affects the matching process in this way.
+\end{enumerate}
+
+\question{QIA.2: Show the classification boundaries learned with the two different models. Compare their training error, and the expected test error, and discuss which model is superior.}
+
+The two classification boundaries are shown in Figure~\ref{fig:overfit}. As it can be observed, model A, represented in green, is producing a very irregular classification boundary which gives a training error of zero, while model B, represented in black, is producing a smoother classification boundary which mis-classifies a few examples of the training data.
+
+However, although the training error is higher for model B than for model A, we expect model B to perform better on the test data, as its smoother classification boundary is more robust to the noise in the training data, while model A is overfitting to the noise in this particular training data.
+
+It is therefore concluded that model B is superior, as it will offer better generalization properties.
+
+\singlefig{overfitting_vectorial}{0.45}{Two different models for fitting the data. The classification boundaries for models A and B are shown in green and black respectively.}{fig:overfit}
+
+\question{QIA.3: Show the detected features in the image for three different values of the peakThreshold option.}
+
+The detected features with three different values of $peakThreshold$ are shown in Figure~\ref{fig:peakThreshold}. % if we want to refer to one particular subplot, we can use its sublabel instead: e.g. \ref{fig:th_0.0001}
+
+\triplefig{\subfig{features_th1}{1}{$peakThreshold = 0.0001$}{fig:th_0.0001}} % sublabels used here
+{\subfig{features_th2}{1}{$peakThreshold = 0.001$}{fig:th_0.001}}
+{\subfig{features_th3}{1}{$peakThreshold = 0.01$}{fig:th_0.01}}
+{Feature detectors with three different values of $peakThreshold$}{fig:peakThreshold}
+
+\end{document}
