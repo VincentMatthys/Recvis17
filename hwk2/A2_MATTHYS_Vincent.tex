@@ -40,20 +40,25 @@
 \begin{document}
 \maketitle
 
-\part{}
+\part{Training and testing an Image Classifier}
 
-\section{Stage A}
+\section{Data preparation and feature extraction}
 
 
-\question{QIA.1: (i) Why is it important to have a similarity co-variant feature detector? (ii) How does this affect the descriptors computed at these detections? (iii) How does this affect the matching process?}
+\question{QA1: Why is the spatial tiling used in the histogram image representation?}
 
-\begin{enumerate}
-	\item It is important to have a similarity co-variant feature detector because of this reason. It is also important because of this other reason.
-	\item The fact that the feature detector is co-variant causes the descriptors computed at these detections to have this and this other property.
-	\item Having feature detectors with similarity co-variance and feature descriptors with this and that other property affects the matching process in this way.
-\end{enumerate}
+The spatial tiling is a way to keep spatial information about relative positions of features, which should help to refine the correspondances, by having a representation of words in a space of dimesnion \( 128 \dotproduct nbr_{tiles}\).
 
-\question{QIA.2: Show the classification boundaries learned with the two different models. Compare their training error, and the expected test error, and discuss which model is superior.}
+\section{Train a classifier for images containing aeroplanes}
+
+\question{QB1: Show the ranked training images in your report.}
+
+
+\question{QB2: In your report, show relevant patches for the three most relevant visual words (in three separate figures) for the top ranked training image. Are the most relevant visual words on the airplane or also appear on background?}
+
+\section{Classify the test images and assess the performance}
+
+\question{QC1: Why is the bias term not needed for the image ranking?}
 
 The two classification boundaries are shown in Figure~\ref{fig:overfit}. As it can be observed, model A, represented in green, is producing a very irregular classification boundary which gives a training error of zero, while model B, represented in black, is producing a smoother classification boundary which mis-classifies a few examples of the training data.
 
