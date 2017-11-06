@@ -6,7 +6,7 @@
 % Header
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewcommand{\assignmenttitle}{Assignment 1: Title of the assignment}
+\renewcommand{\assignmenttitle}{Assignment 1: Instance-level recognition}
 \renewcommand{\studentname}{Vincent Matthys}
 \renewcommand{\email}{vincent.matthys@ens-paris-saclay.fr}
 
@@ -117,10 +117,39 @@ In Figure~\ref{fig:nth0.8_geo}, it's clear there is no mismatch anymore: every m
 
 \question{QII.1: Include in your report images and a graph showing the number of verified matches with changing viewpoint. At first there are more similarity detector matches than affine. Why?}
 At first, introducing affine detectors is introducing a second spatial dimension for each blob, which leads to one more constraint to verify in the geometric transformation. This results discarding some outliers at the very beginning.
+The results are shown in Figure~\ref{fig:II}. The number of inliers between the images 1 and 4,5 or 6 and much higher, as shown by the Figure~\ref{fig:II_3} with the affinity co-variant detectors, which will make the matching process more robust. To conclude, thoses detectors seem to handle more general viewpoints than similarity co-variant detectors.
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{II_6_affinity}
+		\caption{Inliers with affinity co-variant detectors, from 1 to 6 : 6 inliers}
+		\label{fig:II_1}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{II_6_similarity}
+		\caption{Inliers with similarity co-variant detectors, from 1 to 6 : 43 inliers}
+		\label{fig:II_2}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{II_graph}
+		\caption{Graph of the evolution of the number of co-variant detectors in function of the view pair}
+		\label{fig:II_3}
+	\end{subfigure}
+
+	\caption{Affine co-variant detectors}
+	\label{fig:II}
+\end{figure}
+
 
 \question{QIIIA.1: In the above procedure the time required to convert the descriptors into visual words was not accounted for. Why the speed of this step is less important in practice?}
 
-\begin{figure}
+\begin{figure}[ht!]
 	\begin{subfigure}[b]{0.9\textwidth}
 		\centering
 		\includegraphics[width=0.5\linewidth]{IIIA_1}
@@ -166,11 +195,11 @@ The result of the rescoring of the top 25 previous results is shown in Figure~\r
 
 \singlefig{IIID}{1}{Searching ashmolean\_000028 image in 660 images of the Oxford image database lite\_imdb\_100k. Rescoring with number of inliers words}{fig:IIIC}
 
-\begin{figure}
+\begin{figure}[ht!]
 	\begin{subfigure}[b]{0.9\textwidth}
 		\centering
 		\includegraphics[width=1.\linewidth]{IIID_query}
-		\caption{Quert image}
+		\caption{Query image}
 		\label{fig:III_D1}
 	\end{subfigure}
 
@@ -181,7 +210,7 @@ The result of the rescoring of the top 25 previous results is shown in Figure~\r
 		\label{fig:III_D2}
 	\end{subfigure}
 
-	\caption{Searching mistery-building1 image in 660 images of the Oxford image database lite\_imdb\_100k with geometric rescoring}
+	\caption{Searching mystery-building1 image in 660 images of the Oxford image database lite\_imdb\_100k with geometric rescoring}
 	\label{fig:IIID}
 \end{figure}
 
@@ -190,10 +219,115 @@ The query has yet not been shown to the database. The result of the search in th
 
 
 \question{QIV.1: How many features are there in the painting database?}
+The painting database contains 128 features, referred as visual words.
 
 \question{QIV.2: How much memory does the image database take?}
+The databse takes \(184~Mbytes\) of memory.
 
 \question{QIV.3: What are the stages of the search? And how long does each of the stages take for one of the query images?}
+There is 3 stages of the search:
+\begin{enumerate}
+	\item Extractings features from the query
+	\item Searching in the database with inverted index
+	\item Geometric rescoring
+\end{enumerate}
+The duration of each one for each mysterious painting is shown in Table~\ref{tab:IV}.
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{|l|r|r|r|} \hline
+		mysterious painting & feature time & index time  & geometric verifiction time \\\hline
+		1                   & \(0.200~s\)  & \(0.021~s\) & \(0.271~s\)                \\\hline
+		2                   & \(0.345~s\)  & \(0.023~s\) & \(0.431~s\)                \\\hline
+		3                   & \(1.51~s\)   & \(0.025~s\) & \(1.56~s\)                 \\\hline
+	\end{tabular}
+	\caption{Duration of the satges for each query image}
+	\label{tab:IV}
+\end{table}
+
+The results of the query are shown:
+\begin{enumerate}
+	\item for mysterious painting 1 in Figure~\ref{fig:IV_1}: the top-result is Starry Night (Vincent van Gogh)
+	\item for mysterious painting 2 in Figure~\ref{fig:IV_2} : the top-result is A Wheatfield, with Cypresses (Vincent van Gogh)
+	\item for mysterious painting 3 in Figure~\ref{fig:IV_3}: the top-result is Van Gogh's Chair (Vincent van Gogh)
+\end{enumerate}
+
+\begin{figure}[ht!]
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{IV_myst_1_query}
+		\caption{Query image}
+		\label{fig:IV_11}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{IV_myst_1_top}
+		\caption{Top 9 results, rescoring with number of common visual words}
+		\label{fig:IV_12}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{IV_myst_1_match}
+		\caption{Correspondances between query and top 1 result}
+		\label{fig:IV_13}
+	\end{subfigure}
+
+	\caption{Searching the mysterious painting number one in the art\_imdb\_100k\_disc\_hessian database}
+	\label{fig:IV_1}
+\end{figure}
 
 
+\begin{figure}[ht!]
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{IV_myst_2_query}
+		\caption{Query image}
+		\label{fig:IV_21}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{IV_myst_2_top}
+		\caption{Top 9 results, rescoring with number of common visual words}
+		\label{fig:IV_22}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{IV_myst_2_match}
+		\caption{Correspondances between query and top 1 result}
+		\label{fig:IV_23}
+	\end{subfigure}
+
+	\caption{Searching the mysterious painting number two in the art\_imdb\_100k\_disc\_hessian database}
+	\label{fig:IV_2}
+\end{figure}
+
+\begin{figure}[ht!]
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{IV_myst_3_query}
+		\caption{Query image}
+		\label{fig:IV_31}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{IV_myst_3_top}
+		\caption{Top 9 results, rescoring with number of common visual words}
+		\label{fig:IV_32}
+	\end{subfigure}
+
+	\begin{subfigure}[b]{0.9\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{IV_myst_3_match}
+		\caption{Correspondances between query and top 1 result}
+		\label{fig:IV_33}
+	\end{subfigure}
+
+	\caption{Searching the mysterious painting number three in the art\_imdb\_100k\_disc\_hessian database}
+	\label{fig:IV_3}
+\end{figure}
 \end{document}
