@@ -284,5 +284,77 @@ Except for the aeroplanes in the hellinger kernel case, the increase of performa
 
 \part{Training an Image Classifier for Retrieval using Internet image search.}
 
+\question{QP2.1: For the horse class, report the precision at rank-36 for 5 and 10 training images. Show the training images you used. Did the performance of the classifier improve when 10 images were used?}
+
+In figure~\ref{fig_2P2_1} are presented the training imges used.
+The precision at rank-36 is :
+\begin{itemize}
+	\item \(3 / 36\) for 5 training images
+	\item \(14 / 36\) for 10 training images
+\end{itemize}
+And the AP-value increases from 0.12 to 0.26. The performance of the classifier improved a lot using 5 more training images.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000001}
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000002}
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000003}
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000004}
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000005}
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000006}
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000007}
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000008}
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000009}
+	\includegraphics[height = 0.15\textheight, width = 0.4\textwidth]{horse_000010}
+
+	\caption{Horse images used : the five first are ranked first.}
+	\label{fig_2P2_1}
+\end{figure}
+
+\clearpage
+
+\question{QP2.2: What is the best performance (measured by precision at rank-36) you were able to achieve for the horse and the car class? How many training images did you use? For each of the two classes, show examples of your training images, show the top ranked 36 images, and report the precision at rank-36. Compare the difficulty of of retrieving horses and cars.}
+
+\begin{figure}[ht!]
+	\centering
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width = 1.0\textwidth]{IIP22_horses_top36}
+		\subcaption{Correctly retrieved in the top 36: 21 for 30 training images}
+		\label{fig_IIP22_horses}
+	\end{subfigure}
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width = 1.0\textwidth]{IIP22_cars_top36}
+		\subcaption{Correctly retrieved in the top 36: 23 for 10 training images}
+		\label{fig_IIP22_cars}
+	\end{subfigure}
+	\caption{Training classifier using internet image search}
+	\label{fig_2P22}
+\end{figure}
+
+In figure~\ref{fig_2P22} is shown the top 36 ranking obtained after 30 training iamges for horses and 10 training image for cars. The precision at 36 is 23 for the cars class and 21 for the horses class, even with 3 times more training images, meaning it's is more difficult to retrieve horses than cars, in the test set at least.
+
+
+\part{First order methods}
+
+\question{QH1: Compare the dimension of VLAD and BoVW vectors for a given value of K. What should be the relation of the K in VLAD to the K in BoVW in order to obtain descriptors of the same dimension? You can ignore tiling.}
+
+\question{QH2: Replace the encoding used in exercise1 with the VLAD encoding, and repeat the classification experiments for the three classes of Part I (Both linear and Hellinger kernel). How do the results compare to the BoVW encoding? Report mAP results in a table. No need to report all precision-recall curves.}
+
+\begin{table}[ht!]
+	\centering
+	\begin{tabular}{|l | p{3.5cm} | p{3.5cm}|}
+		\hline
+		Class      & AP in test Hellinger Kernel, BoVW & AP in test Hellinger Kernel, VLAD & AP in test linear Kernel, VLAD \\\hline\hline
+		Aeroplanes & \(70.72~\%\)                      & \(74.62~\%\) & \(70.72~\%\)                     \\\hline
+		Motorbikes & \(63.25~\%\)                      & \(68.82~\%\)                      \\\hline
+		Persons    & \(77.39~\%\)                      & \(\75.54~\%\)                     \\\hline
+	\end{tabular}
+	\caption{Effect of using VLAD descriptor instead of BoVW descriptor}
+	\label{tab_III2}
+\end{table}
+
+
 
 \end{document}
