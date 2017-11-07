@@ -191,6 +191,19 @@ For the three classes, the AP value decreases respectively by \(3~\%\),  \(7~\%\
 
 \question{QE2: Modify exercise1.m to use L1 normalization and no normalization and measure the performance change.}
 
+In table~\ref{tab_normalization} is shown the effect of different normalizations over the AP value of the classifier. We can notice that the effect of the normalization differs for the 3 classes. For aeroplanes, the \(L_1\) norm produces better AP value than without normalization. But the \(L_2\) norm produces even worst AP value. For motorbikes, the effect of normalization is quite null whereas for the persons class, the \(L_2\) norm produces better AP value than the others. To conclude, it seems that the performance may be affected by the normalization process, but not in a uniform way.
+
+\begin{table}[ht!]
+	\begin{tabular}{|l | p{3.5cm} | p{3.5cm}| p{3.5cm}|}
+		\hline
+		Class      & AP in test tiling with \(L_2\) norm & AP in test tiling with \(L_1\) norm & AP in test tiling without normalization \\\hline\hline
+		Aeroplanes & \(54.95~\%\)                        & \(64.60~\%\)                        & \(62.45~\%\)                            \\\hline
+		Motorbikes & \(48.66~\%\)                        & \(48.70~\%\)                        & \(48.73~\%\)                            \\\hline
+		Persons    & \(70.64~\%\)                        & \(67.37~\%\)                        & \(67.20~\%\)                            \\\hline
+	\end{tabular}
+	\caption{Effect of histogram normalization over classifier performance}
+	\label{tab_normalization}
+\end{table}
 
 \clearpage
 
