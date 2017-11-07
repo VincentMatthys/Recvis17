@@ -97,15 +97,36 @@ In the image ranking, the bias is a constant term, wich doesn't change the ranks
 
 \section{Learn a classifier for the other classes and assess its performance}
 
-\section{Vary the image representation}
-
+\question{QD1: In your report, show the top ranked images, precision-recall curves and APs for the test data of all the three classes (aeroplanes, motorbikes, and persons). Does the AP performance for the different classes match your expectations based on the variation of the class images?}
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width = 1.0\textwidth]{1C1_C_10}
+	\includegraphics[width = 1.0\textwidth]{1D1_aeroplanes_C_10}
 	\caption{Ranking of a subset of 36 testing images with \( C = 10\) : \(24\) over \(36\) images are correctly retrieved.}
-	\label{fig_1C1_10}
+	\label{fig_1D1_aeroplanes_ranks}
 \end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1D1_motorbikes_C_10}
+	\caption{Ranking of a subset of 36 testing images with \( C = 10\) : \(24\) over \(36\) images are correctly retrieved.}
+	\label{fig_1D1_motorbikes_ranks}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1D1_persons_C_10}
+	\caption{Ranking of a subset of 36 testing images with \( C = 10\) : \(33\) over \(36\) images are correctly retrieved.}
+	\label{fig_1D1_persons_ranks}
+\end{figure}
+
+\clearpage
+\question{QD2: For the motorbike class, give the rank of the first false positive image. What point on the precision-recall curve corresponds to this first false positive image? Give in your report the value of precision and recall for that point on the precision-recall curve.}
+
+\section{Vary the image representation}
+
+
+
 
 In figure~\ref{fig_1C1_10}
 
