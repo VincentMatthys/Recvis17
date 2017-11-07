@@ -109,7 +109,7 @@ In figures~\ref{fig_1D1_aeroplanes}~\ref{fig_1D1_motorbikes}~\ref{fig_1D1_person
 		\subcaption{Ranking of a subset of 36 testing images with \( C = 10\) : \(24\) over \(36\) images are correctly retrieved.}
 		\label{fig_1D1_aeroplanes_a}
 	\end{subfigure}
-	\begin{subfigure}[b]{\textwidth}
+	\begin{subfigure}[b]{0.8\textwidth}
 		\centering
 		\includegraphics[width = 1.0\textwidth]{1D1_aeroplanes_AP_test_C_10}
 		\subcaption{Precision-recall curve for the test data. \(AP = 54.95~\%\)}
@@ -127,7 +127,7 @@ In figures~\ref{fig_1D1_aeroplanes}~\ref{fig_1D1_motorbikes}~\ref{fig_1D1_person
 		\subcaption{Ranking of a subset of 36 testing images with \( C = 10\) : \(24\) over \(36\) images are correctly retrieved.}
 		\label{fig_1D1_motorbikes_a}
 	\end{subfigure}
-	\begin{subfigure}[b]{\textwidth}
+	\begin{subfigure}[b]{0.8\textwidth}
 		\centering
 		\includegraphics[width = 1.0\textwidth]{1D1_motorbikes_AP_test_C_10}
 		\subcaption{Precision-recall curve for the test data. \(AP = 48.66~\%\)}
@@ -145,23 +145,51 @@ In figures~\ref{fig_1D1_aeroplanes}~\ref{fig_1D1_motorbikes}~\ref{fig_1D1_person
 		\subcaption{Ranking of a subset of 36 testing images with \( C = 10\) : \(33\) over \(36\) images are correctly retrieved.}
 		\label{fig_1D1_persons_a}
 	\end{subfigure}
-	\begin{subfigure}[b]{\textwidth}
+	\begin{subfigure}[b]{0.8\textwidth}
 		\centering
 		\includegraphics[width = 1.0\textwidth]{1D1_persons_AP_test_C_10}
 		\subcaption{Precision-recall curve for the test data. \(AP = 70.64~\%\)}
 		\label{fig_1D1_persons_b}
 	\end{subfigure}
-	\caption{SVM Classifier learnt for aeroplanes class}
+	\caption{SVM Classifier learnt for persons class}
 	\label{fig_1D1_persons}
 \end{figure}
 
 \clearpage
 \question{QD2: For the motorbike class, give the rank of the first false positive image. What point on the precision-recall curve corresponds to this first false positive image? Give in your report the value of precision and recall for that point on the precision-recall curve.}
 
-
+For the motorbike class, the first false positive image, visible in figure~\ref{fig_1D1_motorbikes_a}, is the top scoring one (\textit{006687.jpg}), which corresponds to the point \( (Recall(2), Precision(2)) = (0,0)\) on the precision-recall curve, \textit{i.e.} the first point of the precision-recall curve, after the conventional  \( (Recall(1), Precision(1)) = (0,1)\).
 
 \section{Vary the image representation}
 
+\question{QE1: Include in your report precision recall-curves and APs, and compare the test performance to the spatially tiled representation in stage D. How is the performance changing? Why?}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1E1_aeroplanes_AP_test_C_10}
+	\caption{SVM Classifier learnt for aeroplanes class : Precision-recall curve for the test data. \(AP = 51.82~\%\)}
+	\label{fig_1E1_aeroplanes}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1E1_motorbikes_AP_test_C_10}
+	\caption{SVM Classifier learnt for motorbikes class : Precision-recall curve for the test data. \(AP = 41.54~\%\)}
+	\label{fig_1E1_motorbikes}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1E1_persons_AP_test_C_10}
+	\caption{SVM Classifier learnt for persons class : Precision-recall curve for the test data. \(AP = 69.61~\%\)}
+	\label{fig_1E1_persons}
+\end{figure}
+
+For the three classes, the AP value decreases respectively by \(3~\%\),  \(7~\%\) and \(1~\%\) for aeroplanes, motorbikes and persons. These variations are class dependants, meaning that the spatial information brought by the spatial tiling is more relevant for the motorbikes, then for aeroplanes and finaly for persons. This might be correlated with the inner-class variation, as the decrease is inverse-proportional to the initial AP-value.
+
+\clearpage
+
+\question{QE2: Modify exercise1.m to use L1 normalization and no normalization and measure the performance change.}
 
 
 \clearpage
