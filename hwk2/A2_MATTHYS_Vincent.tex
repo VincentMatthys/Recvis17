@@ -47,18 +47,69 @@
 
 \question{QA1: Why is the spatial tiling used in the histogram image representation?}
 
-The spatial tiling is a way to keep spatial information about relative positions of features, which should help to refine the correspondances, by having a representation of words in a space of dimesnion \( 128 \dotproduct nbr_{tiles}\).
+The spatial tiling is a way to keep spatial information about relative positions of features, which should help to refine the correspondances, by having a representation of words in a space of dimesnion \( 128 \times nbr_{tiles}\).
 
 \section{Train a classifier for images containing aeroplanes}
 
 \question{QB1: Show the ranked training images in your report.}
 
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1B1_C_10}
+	\caption{Ranking of a subset of 36 training images with \( C = 10\)}
+	\label{fig_1B1}
+\end{figure}
+A subset of \(36\) training images is ranked in figure~\ref{fig_1B1}, with the score of each one, as computed by the learned SVM classifier for a value of the regularization parameter C of \(10\). It should be noticed that the indicated score is only qualitative, and has to be compared with the score of another image, \textit{i.d} images should be ranked in function of their respective score.
 
+\clearpage
 \question{QB2: In your report, show relevant patches for the three most relevant visual words (in three separate figures) for the top ranked training image. Are the most relevant visual words on the airplane or also appear on background?}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1B2_vw_1}
+	\caption{Relevant patches for the first most relevant visual word and for the first ranking image of the same subset as in figure~\ref{fig_1B1}, and their positions in the image}
+	\label{fig_1B2_vw_1}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1B2_vw_2}
+	\caption{Relevant patches for the second most relevant visual word and for the first ranking image of the same subset as in figure~\ref{fig_1B1}, and their positions in the image}
+	\label{fig_1B2_vw_2}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1B2_vw_3}
+	\caption{Relevant patches for the third most relevant visual word and for the first ranking image of the same subset as in figure~\ref{fig_1B1}, and their positions in the image}
+	\label{fig_1B2_vw_3}
+\end{figure}
+
+In figures~\ref{fig_1B2_vw_1}~\ref{fig_1B2_vw_2}~\ref{fig_1B2_vw_3}, the patches associated to the first three most relevant visual words are shown, with their positions on the first ranked image of the subset as shown in figure~\ref{fig_1B1}. It is important to notice, as shown in the three figures, in patches and in their locations, that the three most relevant visual words are essentially located in the background, in the forest in figure~\ref{fig_1B2_vw_1}, in the tarmac in figure~\ref{fig_1B2_vw_2}, in the sky in figure~\ref{fig_1B2_vw_3}, and not in the airplane.
+
+\clearpage
 
 \section{Classify the test images and assess the performance}
 
 \question{QC1: Why is the bias term not needed for the image ranking?}
+
+In the image ranking, the bias is a constant term, wich doesn't change the ranks. It's then not needed. The important part is the \( w^{\intercal} \cdot h\).
+
+\section{Learn a classifier for the other classes and assess its performance}
+
+\section{Vary the image representation}
+
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width = 1.0\textwidth]{1C1_C_10}
+	\caption{Ranking of a subset of 36 testing images with \( C = 10\) : \(24\) over \(36\) images are correctly retrieved.}
+	\label{fig_1C1_10}
+\end{figure}
+
+In figure~\ref{fig_1C1_10}
+
+\clearpage
 
 The two classification boundaries are shown in Figure~\ref{fig:overfit}. As it can be observed, model A, represented in green, is producing a very irregular classification boundary which gives a training error of zero, while model B, represented in black, is producing a smoother classification boundary which mis-classifies a few examples of the training data.
 
