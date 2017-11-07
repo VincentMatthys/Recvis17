@@ -99,36 +99,70 @@ In the image ranking, the bias is a constant term, wich doesn't change the ranks
 
 \question{QD1: In your report, show the top ranked images, precision-recall curves and APs for the test data of all the three classes (aeroplanes, motorbikes, and persons). Does the AP performance for the different classes match your expectations based on the variation of the class images?}
 
+In figures~\ref{fig_1D1_aeroplanes}~\ref{fig_1D1_motorbikes}~\ref{fig_1D1_persons} are shown the SVM classifier learnt respectively on classes aeroplanes, motorbikes and persons. It's interesting to notice that the AP value is quite similar between the aeroplanes (\(54.95~\%\)) and the motorbikes (\(48.66~\%\)) class, when the AP value for the persons class is much higher (\(70.64~\%\)). This fact can be explain by the inner-class variation, which is reasonably smaller for the persons because of their face, which is approximately constant in shape for every human. On the other hand, the aeroplanes and motorbikes can vary, for the first in term of paintings, and for the second in term of shape and paintings in between wheels. The paintings (= inner-class variations) change may be interpreted as change in gradients directions and values for SIFT descriptors, and therefore for change in visual words.
+
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width = 1.0\textwidth]{1D1_aeroplanes_C_10}
-	\caption{Ranking of a subset of 36 testing images with \( C = 10\) : \(24\) over \(36\) images are correctly retrieved.}
-	\label{fig_1D1_aeroplanes_ranks}
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width = 1.0\textwidth]{1D1_aeroplanes_C_10}
+		\subcaption{Ranking of a subset of 36 testing images with \( C = 10\) : \(24\) over \(36\) images are correctly retrieved.}
+		\label{fig_1D1_aeroplanes_a}
+	\end{subfigure}
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width = 1.0\textwidth]{1D1_aeroplanes_AP_test_C_10}
+		\subcaption{Precision-recall curve for the test data. \(AP = 54.95~\%\)}
+		\label{fig_1D1_aeroplanes_b}
+	\end{subfigure}
+	\caption{SVM Classifier learnt for aeroplanes class}
+	\label{fig_1D1_aeroplanes}
 \end{figure}
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width = 1.0\textwidth]{1D1_motorbikes_C_10}
-	\caption{Ranking of a subset of 36 testing images with \( C = 10\) : \(24\) over \(36\) images are correctly retrieved.}
-	\label{fig_1D1_motorbikes_ranks}
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width = 1.0\textwidth]{1D1_motorbikes_C_10}
+		\subcaption{Ranking of a subset of 36 testing images with \( C = 10\) : \(24\) over \(36\) images are correctly retrieved.}
+		\label{fig_1D1_motorbikes_a}
+	\end{subfigure}
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width = 1.0\textwidth]{1D1_motorbikes_AP_test_C_10}
+		\subcaption{Precision-recall curve for the test data. \(AP = 48.66~\%\)}
+		\label{fig_1D1_motorbikes_b}
+	\end{subfigure}
+	\caption{SVM Classifier learnt for motorbikes class}
+	\label{fig_1D1_motorbikes}
 \end{figure}
 
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width = 1.0\textwidth]{1D1_persons_C_10}
-	\caption{Ranking of a subset of 36 testing images with \( C = 10\) : \(33\) over \(36\) images are correctly retrieved.}
-	\label{fig_1D1_persons_ranks}
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width = 1.0\textwidth]{1D1_persons_C_10}
+		\subcaption{Ranking of a subset of 36 testing images with \( C = 10\) : \(33\) over \(36\) images are correctly retrieved.}
+		\label{fig_1D1_persons_a}
+	\end{subfigure}
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width = 1.0\textwidth]{1D1_persons_AP_test_C_10}
+		\subcaption{Precision-recall curve for the test data. \(AP = 70.64~\%\)}
+		\label{fig_1D1_persons_b}
+	\end{subfigure}
+	\caption{SVM Classifier learnt for aeroplanes class}
+	\label{fig_1D1_persons}
 \end{figure}
 
 \clearpage
 \question{QD2: For the motorbike class, give the rank of the first false positive image. What point on the precision-recall curve corresponds to this first false positive image? Give in your report the value of precision and recall for that point on the precision-recall curve.}
 
+
+
 \section{Vary the image representation}
 
 
-
-
-In figure~\ref{fig_1C1_10}
 
 \clearpage
 
