@@ -49,3 +49,16 @@ Thumbs.db
 *.synctex.gz
 *.run.xml
 *.toc
+
+
+# Custom files #
+################
+hwk2/macros.tex
+hwk2/main.pdf
+hwk2/main.tex
+hwk2/packages.tex
+**/.ipynb_checkpoints
+hwk2/practical-category-recognition-2015a/data/
+hwk2/practical-category-recognition-2015a/vlfeat-0.9.20/
+hwk2/practical-category-recognition-2015a/vlfeat/
+
