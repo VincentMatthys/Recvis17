@@ -18,7 +18,7 @@ The goal of instance-level recognition is to match (recognize) a specific object
 
 The goal of this assignment is to experiment and get basic practical experience with the methods that enable specific object recognition. It includes: (i) using SIFT features to obtain sparse matches between two images; (ii) using affine co-variant detectors to cover changes in viewpoint; (iii) vector quantizing the SIFT descriptors into visual words to enable large scale retrieval; and (iv) constructing and using an image retrieval system to identify objects.
 
-![alt text](/hw1/images/geo_verif.png)
+![alt text](/hw1/images/geo_verif.png?raw=true)
 
 
 <!-- ![alt text][hw1/images/geo_verif.png]
