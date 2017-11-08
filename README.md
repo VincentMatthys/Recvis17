@@ -14,18 +14,16 @@ Automated  object  recognition -- and  more  generally  scene  analysis -- from 
 
 ## [Homework 1](http://www.di.ens.fr/willow/teaching/recvis17/assignment1/)
 
+![Retrieve query](hwk1/images/IV_myst_3_query.png)
+
 The goal of instance-level recognition is to match (recognize) a specific object or scene.  Examples include recognizing a specific building, such as Notre Dame, or a specific painting, such as 'Starry Night' by Van Gogh. The object is recognized despite changes in scale, camera viewpoint, illumination conditions and partial occlusion. An important application is image retrieval - starting from an image of an object of interest (the query), search  through an image dataset to obtain (or retrieve) those images that contain the target object.
 
 The goal of this assignment is to experiment and get basic practical experience with the methods that enable specific object recognition. It includes: (i) using SIFT features to obtain sparse matches between two images; (ii) using affine co-variant detectors to cover changes in viewpoint; (iii) vector quantizing the SIFT descriptors into visual words to enable large scale retrieval; and (iv) constructing and using an image retrieval system to identify objects.
 
-![Matching](hwk1/images/IIID.png)
-
-
-<!-- ![alt text][hw1/images/geo_verif.png]
-
-[logo]: hw1/images/geo_verif.png "Logo Title Text 2" -->
 
 ## [Homework 2](http://www.di.ens.fr/willow/teaching/recvis17/assignment2/)
+
+![Image classification](hwk2/images/1D1_aeroplanes_C_10.png)
 
 In image classification, an image is classified according to its visual content. For example, does it contain an airplane or not. An important application is image retrieval - searching through an image dataset to obtain (or retrieve) those images with particular visual content.
 
