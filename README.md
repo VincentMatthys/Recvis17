@@ -14,7 +14,7 @@ Automated  object  recognition -- and  more  generally  scene  analysis -- from 
 
 ## [Homework 1](http://www.di.ens.fr/willow/teaching/recvis17/assignment1/)
 
-![Retrieve query](hwk1/images/IV_myst_3_query.png)
+![Retrieve query](hwk1/images/IV_myst_3_match.png)
 
 The goal of instance-level recognition is to match (recognize) a specific object or scene.  Examples include recognizing a specific building, such as Notre Dame, or a specific painting, such as 'Starry Night' by Van Gogh. The object is recognized despite changes in scale, camera viewpoint, illumination conditions and partial occlusion. An important application is image retrieval - starting from an image of an object of interest (the query), search  through an image dataset to obtain (or retrieve) those images that contain the target object.
 
