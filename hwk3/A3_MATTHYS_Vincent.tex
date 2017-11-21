@@ -11,7 +11,7 @@
 \renewcommand{\email}{vincent.matthys@ens-paris-saclay.fr}
 
 % renew (sub)section to get alpanumeric characters
-\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thesection}{\Roman{part}.\arabic{section}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Syntax for using figure macros:
@@ -39,5 +39,49 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
+
+\part{Training a fully connected neural network}
+
+
+\part{CNN building blocks}
+
+\section{Convolution}
+
+\question{2.3: \begin{enumerate}
+		\item What filter have we implemented?
+		\item How are the RGB colour channels processed by this filter?
+		\item What image structure are detected?
+	\end{enumerate}}
+\begin{enumerate}
+	\item The filter implemented is used to compute the Laplacian of the image
+	\item Repeating the same filter over the 3 channels, the channells are processed with the same filter.
+	\item The Laplacian kernel detects rapid changes in each color channel. To high response values correspond edges in general.
+\end{enumerate}
+
+
+\section{Non-linear activation functions}
+
+\question{2.2: Some of the functions in a CNN must be non-linear. Why?}
+
+With 0 non-linear functions, the CNN is equivalent to anoter CNN with larger convolutional kernels (resulting of the convolution of filters). Therefore it loses the capability of modeling more complex functions.
+
+\section{Pooling}
+
+\question{2.3: Look at the resulting image. Can you interpret the result?}
+The resulting image is smaller, because of the lack of padding value (has to be set to 7 to keep the initial resolution for a 15x15 window). Moreover, the resulting image presents larger and blurred fruits. This is explained by the maximal value taken for each channel for each pixel.
+
+
+\part{Back-propagation and derivatives}
+
+\section{The theory of back-propagation}
+
+\question{3.1.A: The derivatives \(\frac{\partial f}{\partial w_l}(x_0;w_1,…,w_L)\) (derivatives of the loss with respect to any parameters \(w_l\)) have the same size as the parameters \(w_l\). Why?}
+
+The loss \(f\) is a scalar function, therefore taking its derivate w.r.t. any matrix is the same as taking the matrix composed with the derivative of \(f\) w.r.t. each element of the matrix. Consequently the derivatives \(\frac{\partial f}{\partial w_l}(x_0;w_1,…,w_L)\) has the same size as the parameters \(w_l\).
+
+\part{Learning a character CNN}
+
+\section{Prepare the data}
+
 
 \end{document}
