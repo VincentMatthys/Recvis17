@@ -23,19 +23,17 @@ function [grad_s_Wi, grad_s_Wo, grad_s_bi, grad_s_bo] = ...
 
 % To be completed:
 % H output of first layer
-H = max(0, Wi * X + Bi)
+H = max(0, Wi * X + bi);
 % Y output
-Yo = Wo * H + Bo;
+Yo = Wo * H + bo;
 % gradient of loss w.r.t. Yo
-grad_s_Yo = -Y .* exp(-Y .* Yo) / (1 + exp(-Y .* Yo));
+grad_s_Yo = -Y .* exp(-Y .* Yo) .* sigm(-Y .* Yo);
 
-grad_s_Wi = grad_s_Yo .* Wo' * X' .* ( Wi * X + Bi > 0);
+grad_s_Wi = grad_s_Yo .* Wo' * X' .* ( Wi * X + bi > 0);
 grad_s_Wo = grad_s_Yo .* H';
-grad_s_bi = grad_s_Yo .* ones(length(Bi)) .* ( Wi * X + Bi > 0);
+grad_s_bi = grad_s_Yo .* ones(length(bi), 1) .* ( Wi * X + bi > 0);
 grad_s_bo = Yo;
 
  
-
-
 end
 

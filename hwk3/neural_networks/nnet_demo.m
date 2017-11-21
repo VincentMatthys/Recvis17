@@ -21,7 +21,7 @@ h  = 7; % number of hidden units, i.e. the dimensionality of the hidden layer
 di = 2; % input dimension (2D) -- do not change
 do = 1; % output dimension (1D - classification) -- do not change
 
-lrate     = 0.02; % learning rate
+lrate     = 0.0002; % learning rate
 nsamples  = length(Ytr);
 visualization_step = 1000; % visualize output only these steps
 
@@ -31,9 +31,10 @@ bi = rand(h,1);
 Wo = rand(1,h);
 bo = rand(1,1);
 
-for i = 1:100*nsamples % hundred passes through the data
+for i = 1:10*nsamples % hundred passes through the data
     % draw an example at random
     n = randi(nsamples);
+    
     
     X = Xtr(:,n);
     Y = Ytr(:,n); % desired output
