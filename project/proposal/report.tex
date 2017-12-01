@@ -1,0 +1,47 @@
+\documentclass[12pt,a4paper,onecolumn]{article}
+\input{packages}
+\input{macros}
+
+% ------------------------ General informations --------------------------------
+\title{MVA - Object recognition - Project proposal}
+\author{Vincent Matthys}
+\graphicspath{{images/}{../images/}} % For the images path
+% ------------------------------------------------------------------------------
+
+
+\begin{document}
+
+\begin{tabularx}{0.9\textwidth}{@{} l X r @{} }
+	{\textsc{Master MVA}}       &  & \textsc{Vincent Matthys} \\
+	\textsc{Object recognition} &  & {ENS Paris Saclay}       \\
+\end{tabularx}
+\vspace{1.5cm}
+\begin{center}
+
+	\rule[11pt]{5cm}{0.5pt}
+
+	\textbf{\LARGE \textsc{Automatic estimatin of 3D pose from a signle image}}
+	\vspace{0.5cm}
+
+	Vincent Matthys
+
+	vincent.matthys@ens-paris-saclay.fr
+
+	\rule{5cm}{0.5pt}
+
+	\vspace{1.5cm}
+\end{center}
+
+I decided to work on my one on project D named : \textbf{Automatic estimatin of 3D pose from a signle image}.
+The plan of the work is the following :
+\begin{itemize}
+	\item Obtain 2d detections using stacked hourglass network of Newell et al. \cite{newell2016} pre-trained on MPII dataset. Fine tune on Human3.6M dataset using the parameters of Martinez et al \cite{martinez2017simple}.
+	\item Implement the mapping between 2d points and 3d points as decribed in \cite{martinez2017simple}.
+	\item Test the imeplentation of the Human3D dataset and characterize the working conditions and failures modes
+	\item Extend to video by fixing the shape and optimizing the pose
+	\item Test on the shorter manipulations videos dataset, and characterize the working conditions and failures modes
+\end{itemize}
+
+\printbibliography
+
+\end{document}
